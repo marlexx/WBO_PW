@@ -1,4 +1,5 @@
 import test, { expect } from "@playwright/test";
+import { Assertions } from "../POM/Assertions";
 import { Board } from "../POM/Board";
 import { MainPage } from "../POM/Flow";
 
@@ -8,15 +9,16 @@ test.beforeEach(async ({page}) => {
     await homePage.openWhiteboard();
 })
 
-test("Pencil and whiteout test", async ({ page }) => {
+test("Size Test", async ({ page }) => {
     let board = new Board(page);
+    let assert = new Assertions(page);
 
-    await board.drawWPencil(0);
+    await board.changeSize(25);
 
-    expect(await board.pathElem.count()).toBe(2);
+    await board.drawLine(1);
 
-    await board.eraseAllPath();
+    expect(await board.lineElem.count()).toBe(1);
 
-    expect(await board.pathElem.count()).toBe(0);
-
+    await assert.assertSize(25);
+    
 })

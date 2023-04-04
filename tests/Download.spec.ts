@@ -3,11 +3,13 @@ import { Board } from "../POM/Board";
 import { MainPage } from "../POM/Flow";
 var fs = require('fs');
 
-test("Select test", async ({ page }) => {
+test.beforeEach(async ({ page }) => {
     let homePage = new MainPage(page);
     //await page.pause();
     await homePage.openWhiteboard();
+})
 
+test("Download test", async ({ page }) => {
     let board = new Board(page);
 
     await board.drawEllipse(0);

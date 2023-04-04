@@ -18,6 +18,7 @@ export class Board {
     color: Locator;
     opacity: Locator;
 
+    sizeButton: Locator;
     sizeSlider: Locator;
     opacitySlider: Locator;
 
@@ -28,6 +29,8 @@ export class Board {
     lineElem: Locator;
 
     gridElem: Locator;
+
+    color11: Locator;
 
     constructor(public page: Page) {
 
@@ -46,6 +49,7 @@ export class Board {
         this.color = page.locator("#chooseColor");
         this.opacity = page.locator("#opacityIndicator");
 
+        this.sizeButton = page.getByRole('listitem', { name: 'Size (keyboard shortcut: alt + mouse wheel)' });
         this.sizeSlider = page.locator("#chooseSize");
         this.opacitySlider = page.locator("#chooseOpacity");
 
@@ -56,6 +60,8 @@ export class Board {
         this.lineElem = page.locator("g > line");
 
         this.gridElem = page.locator("#gridContainer");
+
+        this.color11 = page.locator('#color_E65194');
 
     }
 
@@ -130,16 +136,18 @@ export class Board {
     async eraseAllLine() {
         var elementCoords;
         let p = 0;
+        let s = 0;
         await this.eraser.click();
         let elements = await this.lineElem.count();
         let elementsCount = elements;
         for (let i = 0; i < elements; i++) {
             elementCoords = await this.lineElem.nth(0).boundingBox();
             if (elementCoords) {
-                while (await this.lineElem.count() == elementsCount || p > elementCoords.width) {
-                    await console.log(p);
-                    await this.page.mouse.click(elementCoords.x + p, elementCoords.y + 5);
-                    p++;
+                while (await this.lineElem.count() == elementsCount && s != elementCoords.width) {
+                    //await console.log(p);
+                    await this.page.mouse.click(elementCoords.x + p, elementCoords.y + 3);
+                    p = elementCoords.width - s;
+                    s++;
                 }
                 p = 0;
             }
@@ -202,56 +210,60 @@ export class Board {
     async eraseEverything() {
         let box = await this.canvas.boundingBox();
         let bar = await this.line.boundingBox();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(500);
         await this.hand.click();
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(500);
         await this.hand.click();
-        await this.page.waitForLoadState("networkidle");
-        await this.page.waitForTimeout(1000);
-         if (bar){
+        await this.page.waitForTimeout(500);
+        if (bar) {
             await this.page.mouse.move(bar.x + bar.width + 10, 1);
-            console.log("postoji bar");
-         }
-         await this.page.waitForTimeout(1000);
-        await this.page.mouse.down();
-        await this.page.waitForTimeout(1000);
-        if (box){
-            await this.page.mouse.move(box.width, box.height);
-            console.log("postoji box");
         }
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(500);
+        await this.page.mouse.down();
+        await this.page.waitForTimeout(500);
+        if (box) {
+            await this.page.mouse.move(box.width, box.height);
+        }
+        await this.page.waitForTimeout(500);
         await this.page.mouse.up();
-        await this.page.waitForLoadState("networkidle");
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(500);
         await this.page.keyboard.press("Delete");
     }
 
-    async gridChange(){
+    async gridChange() {
         await this.grid.click();
     }
 
-    async downloadImg(){
+    async downloadImg() {
         await this.download.click();
     }
 
-    async assetGridNone(){
-        let fill = await this.gridElem.getAttribute("fill");
-        expect(fill).toBe("none");
-    }
-
-    async assertGridDots(){
-        let fill = await this.gridElem.getAttribute("fill");
-        expect(fill).toBe("url(#dots)");
-    }
-
-    async assertGridLines(){
-        let fill = await this.gridElem.getAttribute("fill");
-        expect(fill).toBe("url(#grid)");
-    }
-
-    async zoomIn(){
+    async zoomIn() {
         await this.zoom.click();
         await this.canvas.click();
+    }
+
+    async lastColor() {
+        await this.color.hover();
+        await this.color11.click();
+    }
+
+    async changeSize(width: number) {
+        await this.sizeButton.hover();
+        await this.page.waitForLoadState('networkidle');
+        let sliderBox = await this.sizeSlider.boundingBox();
+        await this.page.waitForLoadState('networkidle');
+        if (sliderBox)
+            await this.page.mouse.click(sliderBox.x + sliderBox.width / (50 / width), sliderBox.y + sliderBox.height / 2);
+        await this.page.waitForLoadState('networkidle');
+    }
+
+    async changeOpacity(opacityValue: number) {
+        await this.opacity.hover();
+        await this.page.waitForLoadState('networkidle');
+        let sliderBox = await this.opacitySlider.boundingBox();
+        if (sliderBox)
+            await this.page.mouse.click(sliderBox.x + sliderBox.width * opacityValue, sliderBox.y + sliderBox.height / 2);
     }
 
 }

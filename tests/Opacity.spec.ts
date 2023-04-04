@@ -1,6 +1,8 @@
 import test, { expect } from "@playwright/test";
+import { Assertions } from "../POM/Assertions";
 import { Board } from "../POM/Board";
 import { MainPage } from "../POM/Flow";
+const OPACITY = 0.5
 
 test.beforeEach(async ({ page }) => {
     let homePage = new MainPage(page);
@@ -8,16 +10,15 @@ test.beforeEach(async ({ page }) => {
     await homePage.openWhiteboard();
 })
 
-test("Text test", async ({ page }) => {
+test("Opacity Test", async ({ page }) => {
     let board = new Board(page);
+    let assert = new Assertions(page);
 
-    await board.writeText("testing tests");
+    await board.changeOpacity(OPACITY);
 
-    expect(await board.textElem.count()).toBe(1);
+    await board.drawLine(1);
 
-    expect(await board.textElem.innerHTML()).toBe("testing tests");
+    expect(await board.lineElem.count()).toBe(1);
+    await assert.assertOpacity(OPACITY);
 
-    await board.eraseAllText();
-
-    expect(await board.textElem.count()).toBe(0);
 })

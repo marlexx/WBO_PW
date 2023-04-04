@@ -1,24 +1,37 @@
 import test, { expect } from "@playwright/test";
+import { Assertions } from "../POM/Assertions";
 import { Board } from "../POM/Board";
 import { MainPage } from "../POM/Flow";
 
-test("Line and Snap Line Test", async ({ page }) => {
+test.beforeEach(async ({ page }) => {
     let homePage = new MainPage(page);
     //await page.pause();
     await homePage.openWhiteboard();
+})
 
-    let board = new Board(page);
+test.describe("Color Tests", () => {
+    for (var i = 0; i < 11; i++) {
+        let l = i;
+        test("Color " + l.toString() + " Test", async ({ page }) => {
 
-    for(let i=0; i<10; i++)
-    {
-    await page.keyboard.press(i.toString());
+            //await page.pause();
+            let board = new Board(page);
+            let assert = new Assertions(page);
 
-    await board.drawLine(1);
+            if (l != 10) {
+                await page.waitForLoadState('networkidle');
+                await page.keyboard.press(l.toString());
+                await page.waitForLoadState('networkidle');
+                await board.drawLine(1)
 
-    expect(await board.lineElem.count()).toBe(1);
+            }
+            else {
+                await board.lastColor();
+                await board.drawLine(1)
+            }
 
-    await board.eraseAllLine();
+            await assert.assertColor(l);
 
-    expect(await board.lineElem.count()).toBe(0);
+        })
     }
 })
