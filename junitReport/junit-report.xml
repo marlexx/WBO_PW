@@ -1,0 +1,134 @@
+<testsuites id="" name="" tests="24" failures="2" skipped="0" errors="0" time="16.93206200000085">
+<testsuite name="Circle.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.486" errors="0">
+<testcase name="Circle and Ellipse Test" classname="Circle.spec.ts" time="1.486">
+</testcase>
+</testsuite>
+<testsuite name="Color.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="11" failures="0" skipped="0" time="22.155" errors="0">
+<testcase name="Color Tests › Color 0 Test" classname="Color.spec.ts" time="1.997">
+</testcase>
+<testcase name="Color Tests › Color 1 Test" classname="Color.spec.ts" time="1.985">
+</testcase>
+<testcase name="Color Tests › Color 2 Test" classname="Color.spec.ts" time="1.902">
+</testcase>
+<testcase name="Color Tests › Color 3 Test" classname="Color.spec.ts" time="1.961">
+</testcase>
+<testcase name="Color Tests › Color 4 Test" classname="Color.spec.ts" time="2.154">
+</testcase>
+<testcase name="Color Tests › Color 5 Test" classname="Color.spec.ts" time="2.251">
+</testcase>
+<testcase name="Color Tests › Color 6 Test" classname="Color.spec.ts" time="2.633">
+</testcase>
+<testcase name="Color Tests › Color 7 Test" classname="Color.spec.ts" time="1.856">
+</testcase>
+<testcase name="Color Tests › Color 8 Test" classname="Color.spec.ts" time="1.981">
+</testcase>
+<testcase name="Color Tests › Color 9 Test" classname="Color.spec.ts" time="2.249">
+</testcase>
+<testcase name="Color Tests › Color 10 Test" classname="Color.spec.ts" time="1.186">
+</testcase>
+</testsuite>
+<testsuite name="Download.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.517" errors="0">
+<testcase name="Download test" classname="Download.spec.ts" time="1.517">
+<system-out>
+<![CDATA[C:\Users\THINKB~1\AppData\Local\Temp\playwright-artifacts-bWXShW\0dc449aa-90b4-48b4-9ed9-35cd3e33150c
+]]>
+</system-out>
+</testcase>
+</testsuite>
+<testsuite name="Grid.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="3" failures="0" skipped="0" time="3.631" errors="0">
+<testcase name="Grid Test 0" classname="Grid.spec.ts" time="1.051">
+</testcase>
+<testcase name="Grid Test 1" classname="Grid.spec.ts" time="1.14">
+</testcase>
+<testcase name="Grid Test 2" classname="Grid.spec.ts" time="1.44">
+</testcase>
+</testsuite>
+<testsuite name="Line.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.466" errors="0">
+<testcase name="Line and Snap Line Test" classname="Line.spec.ts" time="1.466">
+</testcase>
+</testsuite>
+<testsuite name="Opacity.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="1" skipped="0" time="2.482" errors="0">
+<testcase name="Opacity Test" classname="Opacity.spec.ts" time="2.482">
+<properties>
+<property name="testrail_attachment" value="test-resultsSS/screenshots/screenshot-1681380087746.png">
+</property>
+</properties>
+<failure message="Opacity.spec.ts:13:5 Opacity Test" type="FAILURE">
+<![CDATA[  [chromium] › Opacity.spec.ts:13:5 › Opacity Test ─────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "0.6"
+    Received: "1"
+
+       at ..\POM\Assertions.ts:16
+
+      14 |         await this.page.waitForLoadState('networkidle');
+      15 |         let currentOpacity = await this.lineElem.last().getAttribute("opacity");
+    > 16 |         await expect(currentOpacity).toBe((opacityValue + 0.1).toString()); //0.6 je zapravo pola slidera
+         |                                      ^
+      17 |     }
+      18 |
+      19 |     async assetGridNone() {
+
+        at Assertions.assertOpacity (C:\WBO_PW\POM\Assertions.ts:16:38)
+        at C:\WBO_PW\tests\Opacity.spec.ts:22:5
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="Pencil.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.524" errors="0">
+<testcase name="Pencil and whiteout test" classname="Pencil.spec.ts" time="1.524">
+</testcase>
+</testsuite>
+<testsuite name="Rectangle.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.51" errors="0">
+<testcase name="Rectangle and Square test" classname="Rectangle.spec.ts" time="1.51">
+</testcase>
+</testsuite>
+<testsuite name="Selector.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="7.129" errors="0">
+<testcase name="Select test" classname="Selector.spec.ts" time="7.129">
+<properties>
+<property name="slow" value="">
+</property>
+</properties>
+</testcase>
+</testsuite>
+<testsuite name="Size.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="1" skipped="0" time="2.393" errors="0">
+<testcase name="Size Test" classname="Size.spec.ts" time="2.393">
+<properties>
+<property name="testrail_attachment" value="test-resultsSS/screenshots/screenshot-1681380089566.png">
+</property>
+</properties>
+<failure message="Size.spec.ts:12:5 Size Test" type="FAILURE">
+<![CDATA[  [chromium] › Size.spec.ts:12:5 › Size Test ───────────────────────────────────────────────────────
+
+    Error: expect(received).toBe(expected) // Object.is equality
+
+    Expected: "26"
+    Received: "4"
+
+       at ..\POM\Assertions.ts:37
+
+      35 |         await this.page.waitForLoadState('networkidle');
+      36 |         let size = await this.lineElem.last().getAttribute("stroke-width");
+    > 37 |         await expect(size).toBe((width + 1).toString()); //26 je zapravo sredina slidera
+         |                            ^
+      38 |     }
+      39 |
+      40 |     async assertColor(i) {
+
+        at Assertions.assertSize (C:\WBO_PW\POM\Assertions.ts:37:28)
+        at C:\WBO_PW\tests\Size.spec.ts:22:5
+]]>
+</failure>
+</testcase>
+</testsuite>
+<testsuite name="Text.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="2.185" errors="0">
+<testcase name="Text test" classname="Text.spec.ts" time="2.185">
+</testcase>
+</testsuite>
+<testsuite name="Zoom.spec.ts" timestamp="2023-04-13T10:01:17.577Z" hostname="chromium" tests="1" failures="0" skipped="0" time="1.776" errors="0">
+<testcase name="Rectangle and Square test" classname="Zoom.spec.ts" time="1.776">
+</testcase>
+</testsuite>
+</testsuites>

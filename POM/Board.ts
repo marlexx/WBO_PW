@@ -260,7 +260,7 @@ export class Board {
 
     async changeOpacity(opacityValue: number) {
         await this.opacity.hover();
-        await this.page.waitForLoadState('networkidle');
+        await this.page.waitForTimeout(700);
         let sliderBox = await this.opacitySlider.boundingBox();
         if (sliderBox)
             await this.page.mouse.click(sliderBox.x + sliderBox.width * opacityValue, sliderBox.y + sliderBox.height / 2);

@@ -35,3 +35,11 @@ test.describe("Color Tests", () => {
         })
     }
 })
+
+test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      let screenshotPath = "test-resultsSS/screenshots/screenshot-"+Date.now()+".png";
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      testInfo.annotations.push({ type: 'testrail_attachment', description: screenshotPath });
+    }
+  });

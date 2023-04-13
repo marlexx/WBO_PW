@@ -39,4 +39,12 @@ for (var i = 0; i < 3; i++) {
     })
 }
 
+test.afterEach(async ({ page }, testInfo) => {
+    if (testInfo.status !== testInfo.expectedStatus) {
+      let screenshotPath = "test-resultsSS/screenshots/screenshot-"+Date.now()+".png";
+      await page.screenshot({ path: screenshotPath, fullPage: true });
+      testInfo.annotations.push({ type: 'testrail_attachment', description: screenshotPath });
+    }
+  });
+
 

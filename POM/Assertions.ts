@@ -5,12 +5,13 @@ export class Assertions {
     lineElem: Locator;
     gridElem: Locator;
 
-    constructor(page) {
+    constructor(public page: Page) {
         this.lineElem = page.locator("g > line");
         this.gridElem = page.locator("#gridContainer");
     }
 
     async assertOpacity(opacityValue: number) {
+        await this.page.waitForLoadState('networkidle');
         let currentOpacity = await this.lineElem.last().getAttribute("opacity");
         await expect(currentOpacity).toBe((opacityValue + 0.1).toString()); //0.6 je zapravo pola slidera
     }
@@ -31,6 +32,7 @@ export class Assertions {
     }
 
     async assertSize(width: number) {
+        await this.page.waitForLoadState('networkidle');
         let size = await this.lineElem.last().getAttribute("stroke-width");
         await expect(size).toBe((width + 1).toString()); //26 je zapravo sredina slidera
     }
